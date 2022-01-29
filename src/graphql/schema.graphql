@@ -1,0 +1,339 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+directive @admin on FIELD_DEFINITION
+
+interface Node {
+    id: ID!
+}
+
+type Airdrop {
+    amount: String!
+    name: String!
+    value: String!
+}
+
+type AuthResponse {
+    authToken: String!
+    result: AuthResponse_Result!
+}
+
+type BasicInfoConnection {
+    list: [Connect!]!
+    pageInfo: PageInfo!
+}
+
+type Connect {
+    address: String!
+    alias: String!
+    avatar: String!
+    domain: String!
+    ens: String!
+    lastModifiedTime: String!
+    namespace: String!
+}
+
+type ConnectResponse {
+    result: ConnectResponse_Result!
+}
+
+type FollowResponse {
+    result: FollowResponse_Result!
+}
+
+type FollowStatus {
+    isFollowed: Boolean!
+    isFollowing: Boolean!
+}
+
+type GenerateWeb3SummaryResponse {
+    imageUrl: String!
+    result: GenerateSummaryResponse_Result!
+}
+
+type GetActivationCodeResponse {
+    code: String!
+    result: GetActivationCodeResponse_Result!
+}
+
+type GetEligibilityResponse {
+    isFollowerEligible: Boolean!
+    isTwitterVerified: Boolean!
+}
+
+type HomePage {
+    connectionCount: Int!
+    userCount: Int!
+}
+
+type Mutation {
+    alias(input: UpdateConnectionInput!): ConnectResponse!
+    auth(address: String!, network: String, signature: String!): AuthResponse! @deprecated(reason: "auth for centralized authorization is deprecated. To make data verifiable, use RegisterKey instead.")
+    connect(input: UpdateConnectionInput!): ConnectResponse!
+    disconnect(input: UpdateConnectionInput!): ConnectResponse!
+    follow(alias: String, fromAddr: String!, namespace: String!, network: String, signature: String!, toAddr: String!): FollowResponse! @deprecated(reason: "follow is deprecated. To make data verifiable, use connect instead.")
+    generateSummary(address: String!, imageContent: String!, signature: String!, source: Source!): GenerateWeb3SummaryResponse!
+    registerKey(input: RegisterKeyInput!): RegisterKeyResponse!
+    setAlias(alias: String!, fromAddr: String!, namespace: String!, network: String, signature: String!, toAddr: String!): SetAliasResponse! @deprecated(reason: "setAlias is deprecated. To make data verifiable, use alias instead.")
+    setProfile(address: String!, avatar: String, domain: String, network: String!, signature: String!, twitter: String): SetProfileResponse!
+    unfollow(fromAddr: String!, namespace: String!, network: String, signature: String!, toAddr: String!): UnFollowResponse! @deprecated(reason: "unfollow is deprecated. To make data verifiable, use disconnect instead.")
+}
+
+type PageInfo {
+    endCursor: String!
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String!
+}
+
+type Popular {
+    address: String!
+    avatar: String!
+    domain: String!
+    ens: String!
+    followerCount: Int!
+    isFollowing: Boolean!
+    recommendationReason: String!
+}
+
+type PopularConnection {
+    list: [Popular!]!
+    pageInfo: PageInfo!
+}
+
+type Query {
+    activationCode(address: String!): GetActivationCodeResponse!
+    allFollowings(address: String!, namespace: String): [Connect!]! @deprecated(reason: "allFollowings is deprecated. Use identity.followings instead.")
+    featured(fromAddr: String, network: String): [Popular!]!
+    followStatus(fromAddr: String!, namespace: String, network: String, toAddr: String!): FollowStatus
+    followingAlias(fromAddr: String!, namespace: String, network: String, toAddr: String!): String!
+    getEligibility(address: String!): GetEligibilityResponse!
+    homePage(network: String): HomePage!
+    identity(address: String, network: String): UserIdentity!
+    popular(after: String, first: Int, fromAddr: String, network: String, tags: TagsInput!): PopularConnection!
+    proof(fromAddr: String!, namespace: String, network: String, toAddr: String!): String!
+    rankings(after: String, first: Int, fromAddr: String, network: String): RankingResponse!
+    recommendations(address: String!, after: String, filter: RecommFilter, first: Int, network: String): RecommendationResponse!
+    web3EOYSummary(address: String!): Web3EOYSummary!
+    web3EOYSummaryEligiblity(address: String!): Web3EOYSummaryEligiblity!
+}
+
+type Ranking {
+    address: String!
+    avatar: String!
+    domain: String!
+    ens: String!
+    followerCount: Int!
+    isFollowing: Boolean!
+    isP10: Boolean!
+}
+
+type RankingConnection {
+    list: [Ranking!]!
+    pageInfo: PageInfo!
+}
+
+type RankingResponse {
+    data: RankingConnection
+    result: RankingResponse_Result!
+}
+
+type Recommendation {
+    address: String!
+    avatar: String!
+    domain: String!
+    ens: String!
+    followerCount: Int!
+    recommendationReason: String!
+}
+
+type RecommendationConnection {
+    list: [Recommendation!]!
+    pageInfo: PageInfo!
+}
+
+type RecommendationResponse {
+    data: RecommendationConnection
+    result: RecommendationResponse_Result!
+}
+
+type RegisterKeyResponse {
+    result: RegisterKeyResponse_Result!
+}
+
+type SetAliasResponse {
+    result: SetAliasResponse_Result!
+}
+
+type SetProfileResponse {
+    result: SetProfileResponse_Result!
+}
+
+type Social {
+    twitter: String!
+}
+
+type UnFollowResponse {
+    result: UnFollowResponse_Result!
+}
+
+type UserIdentity {
+    address: String!
+    avatar: String!
+    domain: String!
+    ens: String!
+    followerCount(namespace: String, network: String): Int!
+    followers(after: String, first: Int, namespace: String, network: String): BasicInfoConnection!
+    followingCount(namespace: String, network: String): Int!
+    followings(after: String, first: Int, namespace: String, network: String): BasicInfoConnection!
+    friends(after: String, first: Int, namespace: String, network: String): BasicInfoConnection!
+    joinTime: String!
+    social: Social!
+}
+
+type Web3EOYSummary {
+    airdrops: [Airdrop!]
+    greeting: String!
+    joinTime: Int!
+    keyword: String!
+    keywordUrl: String!
+    recommendations(address: String!): [Recommendation!]
+    userType: String!
+}
+
+type Web3EOYSummaryEligiblity {
+    eligible: Boolean!
+    imageUrl: String!
+}
+
+enum AuthResponse_Result {
+    AUTHENTICATION_FAILED
+    SUCCESS
+}
+
+enum ConnectResponse_Result {
+    EMPTY_NAMESPACE
+    FAILED
+    FOLLOWED
+    INVALID_ADDRESS
+    INVALID_OPERATION
+    INVALID_SIGNATURE
+    SIGNING_KEY_EXPIRED
+    SUCCESS
+    UNFOLLOWED
+}
+
+enum FollowResponse_Result {
+    AUTHENTICATION_FAILED
+    EMPTY_NAMESPACE
+    FAILED
+    FOLLOWED
+    INVALID_ADDRESS
+    SUCCESS
+}
+
+enum GenerateSummaryResponse_Result {
+    AUTHENTICATION_FAILED
+    FAILED
+    INVALID_ADDRESS
+    SUCCESS
+}
+
+enum GetActivationCodeResponse_Result {
+    INELIGIBLE
+    INSUFFICIENT_CODE
+    INVALID_ADDRESS
+    SUCCESS
+}
+
+enum RankingResponse_Result {
+    INVALID_ADDRESS
+    SUCCESS
+}
+
+enum RecommFilter {
+    DEFI
+    GAME
+    NFT
+    SOCIAL
+}
+
+enum RecommendationResponse_Result {
+    INDEXING
+    NO_RECOMMENDATION
+    SUCCESS
+}
+
+enum RegisterKeyResponse_Result {
+    FAILED
+    SUCCESS
+}
+
+enum SetAliasResponse_Result {
+    AUTHENTICATION_FAILED
+    EMPTY_NAMESPACE
+    FAILED
+    INVALID_ADDRESS
+    SUCCESS
+    UNFOLLOWED
+}
+
+enum SetProfileResponse_Result {
+    AUTHENTICATION_FAILED
+    INVALID_ADDRESS
+    PROFILE_NOT_EXIST
+    SUCCESS
+    UNSUPPORTED_NETWORK
+}
+
+enum Source {
+    MOBILE
+    WEBSITE
+}
+
+enum Tag {
+    FEATURED
+    NFTMARKET
+    PLAZA
+}
+
+enum UnFollowResponse_Result {
+    AUTHENTICATION_FAILED
+    EMPTY_NAMESPACE
+    FAILED
+    INVALID_ADDRESS
+    SUCCESS
+    UNFOLLOWED
+}
+
+scalar Percentage
+
+scalar Time
+
+scalar Upload
+
+input RegisterKeyInput {
+    address: String!
+    message: String!
+    network: String
+    signature: String!
+}
+
+input TagsInput {
+    list: [Tag!]!
+}
+
+input UpdateConnectionInput {
+    alias: String
+    fromAddr: String!
+    namespace: String!
+    network: String
+    operation: String!
+    signature: String!
+    signingKey: String!
+    toAddr: String!
+}

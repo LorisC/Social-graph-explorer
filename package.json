@@ -1,0 +1,30 @@
+{
+  "name": "social-connection-graph-explorer",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "3d-force-graph": "^1.70.5",
+    "@apollo/client": "^3.5.7",
+    "@cyberlab/cyberconnect": "^4.1.10",
+    "@ethersproject/providers": "^5.5.2",
+    "@rollup/plugin-graphql": "^1.1.0",
+    "@vue/apollo-composable": "^4.0.0-alpha.16",
+    "axios": "^0.25.0",
+    "graphql": "^16.2.0",
+    "graphql-tag": "^2.12.6",
+    "three": "^0.136.0",
+    "three-css2drender": "^1.0.0",
+    "vue": "^3.2.25",
+    "web3modal": "^1.9.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "sass": "^1.49.0",
+    "vite": "^2.7.2"
+  }
+}

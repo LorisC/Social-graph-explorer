@@ -1,0 +1,29 @@
+query ADDRESS_FOLLOW_RELATION($address: String!) {
+    identity(address: $address) {
+        address
+        avatar
+        domain
+        joinTime
+        social {
+            twitter
+        }
+        followingCount
+        followerCount
+        followers(first: 200000) {
+            list {
+                address
+            }
+            pageInfo {
+                endCursor
+                startCursor
+                hasNextPage
+                hasPreviousPage
+            }
+        }
+        followings(first: 200000) {
+            list{
+                address
+            }
+        }
+    }
+}
